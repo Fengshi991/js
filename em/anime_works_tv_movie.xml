@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>各年日本动画列表 - 电视动画与动画电影作品名（原名为标题）</title>
-    <link>https://zh.wikipedia.org/zh-cn/2025%E5%B9%B4%E6%97%A5%E6%9C%AC%E5%8B%95%E7%95%AB%E5%88%97%E8%A1%A8#10%E6%9C%88%EF%BC%8D12%E6%9C%88</link>
-    <description>仅从“电视动画”和“动画电影”小节抓取的日本动画作品名列表，RSS 项目标题为原名（共 336 条）</description>
+    <title>各年日本动画列表 - 电视动画与动画电影（原名为标题）</title>
+    <link>https://zh.wikipedia.org/zh-cn/2025%E5%B9%B4%E6%97%A5%E6%9C%AC%E5%8B%95%E7%95%AB%E5%88%97%E8%A1%A8</link>
+    <description>仅从“电视动画”和“动画电影”小节抓取的条目，RSS 标题优先使用日语原名（共 336 条）</description>
 
     <item>
       <title>天久鷹央の推理カルテ</title>

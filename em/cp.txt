@@ -10,16 +10,16 @@
   // 1. 目标小节的 h2 id
   const targetIds = new Set(['電視動畫', '動畫電影']);
 
-  // 辅助函数：从某个表格向前找最近的 heading，返回它的 h2.id
+  // 从某个表格向前找最近的 heading，返回它的 h2.id
   const findSectionIdForTable = (table) => {
     let prev = table.previousElementSibling;
     while (prev) {
-      // 情况一：<div class="mw-heading mw-heading2"><h2 id="...">...</h2></div>
+      // 维基常见：<div class="mw-heading mw-heading2"><h2 id="...">...</h2></div>
       if (prev.matches && prev.matches('.mw-heading2, .mw-heading')) {
         const h2 = prev.querySelector('h2[id]');
         if (h2 && h2.id) return h2.id;
       }
-      // 情况二：直接的 <h2 id="...">
+      // 或者直接的 <h2 id="...">
       if (prev.tagName && prev.tagName.toLowerCase() === 'h2' && prev.id) {
         return prev.id;
       }
@@ -28,7 +28,7 @@
     return null;
   };
 
-  // 2. 先拿到页面所有 wikitable，再筛选出属于“電視動畫 / 動畫電影”两节的表格
+  // 2. 找出“電視動畫 / 動畫電影”小节下的所有 wikitable
   const allTables = document.querySelectorAll('table.wikitable');
   const tables = [];
 
@@ -41,13 +41,22 @@
 
   console.log('匹配到的目标小节表格数量 =', tables.length);
 
-  // 3. 在这些表格中抓取「作品名 + 原名 + 链接 + 日期」
+  // 3. 抓取「作品名 + 原名 + 链接 + 日期」
   const items = [];
 
   tables.forEach(table => {
-    const headerThs = table.querySelectorAll('th');
+    // 只取 thead 最后一行作为有效表头，避免多级表头错位
+    let headerRow = null;
+    if (table.tHead && table.tHead.rows.length) {
+      headerRow = table.tHead.rows[table.tHead.rows.length - 1];
+    } else {
+      headerRow = table.querySelector('tr');
+    }
+    if (!headerRow) return;
+
+    const headerThs = headerRow.querySelectorAll('th');
+
     let worksColIndex = -1;    // 作品名列
-    let originalColIndex = -1; // 原名列
     let dateColIndex = -1;     // 日期列（开始日－结束日 / 上映日）
 
     headerThs.forEach(th => {
@@ -55,21 +64,17 @@
       if (text === '作品名') {
         worksColIndex = th.cellIndex;
       }
-      if (text === '原名') {
-        originalColIndex = th.cellIndex;
-      }
-      if (text === '开始日－结束日' || text === '上映日') {
+      if (text.includes('开始日') || text.includes('上映日')) {
         dateColIndex = th.cellIndex;
       }
     });
 
-    // 至少要有作品名列（用来取链接），原名列可选
     if (worksColIndex === -1) return;
 
     const bodyRows = table.tBodies.length ? table.tBodies[0].rows : table.rows;
 
     Array.from(bodyRows).forEach(row => {
-      if (!row.querySelector('td')) return; // 跳过只有 th 的表头行
+      if (!row.querySelector('td')) return; // 跳过表头行
 
       const worksCell = row.cells[worksColIndex];
       if (!worksCell) return;
@@ -77,36 +82,35 @@
       const worksText = worksCell.textContent.trim(); // 作品名（中文 / 本地化）
       if (!worksText) return;
 
-      // 原名列可能为空，取不到就回退到作品名
-      let originalText = '';
-      if (originalColIndex !== -1 && row.cells[originalColIndex]) {
-        originalText = row.cells[originalColIndex].textContent.trim();
-      }
+      // 关键：原名 = 同一行中，作品名单元格右边的那个 <td>
+      const originalCell = worksCell.nextElementSibling;
+      const originalText = originalCell ? originalCell.textContent.trim() : '';
 
-      const titleForRss = originalText || worksText; // RSS <title> 使用原名，缺失时退回作品名
+      // 标题优先使用原名，没有原名就退回作品名
+      const titleForRss = originalText || worksText;
 
-      // 标题单元格里的第一个链接，拼成绝对 URL
+      // 作品名单元格的第一个 <a> 链接
       const aTag = worksCell.querySelector('a[href]');
       const link = aTag
         ? new URL(aTag.getAttribute('href'), window.location.origin).href
         : window.location.origin;
 
-      // 日期列文本，用作 pubDate（保持原样）
+      // 日期列文本（不转换格式）
       let pubDateText = '';
       if (dateColIndex !== -1 && row.cells[dateColIndex]) {
         pubDateText = row.cells[dateColIndex].textContent.trim();
       }
 
-      // description 里可以放「作品名 / 原名」方便看
+      // description：用「作品名 / 原名」方便识别
       let desc = '';
-      if (originalText && worksText && originalText !== worksText) {
+      if (originalText && originalText !== worksText) {
         desc = `${worksText} / ${originalText}`;
       } else {
         desc = worksText || originalText;
       }
 
       items.push({
-        title: titleForRss,   // RSS 标题：原名优先
+        title: titleForRss,   // 这里是“日语原名”为主
         link,
         pubDate: pubDateText,
         description: desc
@@ -117,7 +121,7 @@
   // 4. 校验计数输出
   console.log('条目数（校验用） =', items.length);
 
-  // 5. 生成每个 <item>（含 title / link / pubDate / description）
+  // 5. 生成每个 <item>
   const itemsXml = items.map(it => `
     <item>
       <title>${escapeXML(it.title)}</title>
@@ -130,14 +134,14 @@
   const rssText = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>各年日本动画列表 - 电视动画与动画电影作品名（原名为标题）</title>
+    <title>各年日本动画列表 - 电视动画与动画电影（原名为标题）</title>
     <link>${escapeXML(window.location.href)}</link>
-    <description>仅从“电视动画”和“动画电影”小节抓取的日本动画作品名列表，RSS 项目标题为原名（共 ${items.length} 条）</description>
+    <description>仅从“电视动画”和“动画电影”小节抓取的条目，RSS 标题优先使用日语原名（共 ${items.length} 条）</description>
 ${itemsXml}
   </channel>
 </rss>`;
 
-  // 7. 用 Blob 触发浏览器下载 anime_works_tv_movie.xml
+  // 7. 用 Blob 下载 anime_works_tv_movie.xml
   const blob = new Blob([rssText], { type: 'application/rss+xml;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
