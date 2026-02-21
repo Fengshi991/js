@@ -1,0 +1,73 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.github.metacubex.clash.alpha",
+  "variantName": "alphaDebug",
+  "elements": [
+    {
+      "type": "UNIVERSAL",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Alpha.debug",
+      "outputFile": "cmfa-2.11.23-alpha-universal-debug.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "armeabi-v7a"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Alpha.debug",
+      "outputFile": "cmfa-2.11.23-alpha-armeabi-v7a-debug.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "x86_64"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Alpha.debug",
+      "outputFile": "cmfa-2.11.23-alpha-x86_64-debug.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "x86"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Alpha.debug",
+      "outputFile": "cmfa-2.11.23-alpha-x86-debug.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "arm64-v8a"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Alpha.debug",
+      "outputFile": "cmfa-2.11.23-alpha-arm64-v8a-debug.apk"
+    }
+  ],
+  "elementType": "File",
+  "minSdkVersionForDexing": 21
+}
