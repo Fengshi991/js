@@ -1,0 +1,97 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.github.metacubex.clash.meta",
+  "variantName": "metaRelease",
+  "elements": [
+    {
+      "type": "UNIVERSAL",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Meta",
+      "outputFile": "cmfa-2.11.23-meta-universal-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "arm64-v8a"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Meta",
+      "outputFile": "cmfa-2.11.23-meta-arm64-v8a-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "armeabi-v7a"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Meta",
+      "outputFile": "cmfa-2.11.23-meta-armeabi-v7a-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "x86_64"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Meta",
+      "outputFile": "cmfa-2.11.23-meta-x86_64-release.apk"
+    },
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "x86"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 211023,
+      "versionName": "2.11.23.Meta",
+      "outputFile": "cmfa-2.11.23-meta-x86-release.apk"
+    }
+  ],
+  "elementType": "File",
+  "baselineProfiles": [
+    {
+      "minApi": 28,
+      "maxApi": 30,
+      "baselineProfiles": [
+        "baselineProfiles/1/cmfa-2.11.23-meta-universal-release.dm",
+        "baselineProfiles/1/cmfa-2.11.23-meta-arm64-v8a-release.dm",
+        "baselineProfiles/1/cmfa-2.11.23-meta-armeabi-v7a-release.dm",
+        "baselineProfiles/1/cmfa-2.11.23-meta-x86_64-release.dm",
+        "baselineProfiles/1/cmfa-2.11.23-meta-x86-release.dm"
+      ]
+    },
+    {
+      "minApi": 31,
+      "maxApi": 2147483647,
+      "baselineProfiles": [
+        "baselineProfiles/0/cmfa-2.11.23-meta-universal-release.dm",
+        "baselineProfiles/0/cmfa-2.11.23-meta-arm64-v8a-release.dm",
+        "baselineProfiles/0/cmfa-2.11.23-meta-armeabi-v7a-release.dm",
+        "baselineProfiles/0/cmfa-2.11.23-meta-x86_64-release.dm",
+        "baselineProfiles/0/cmfa-2.11.23-meta-x86-release.dm"
+      ]
+    }
+  ],
+  "minSdkVersionForDexing": 21
+}
