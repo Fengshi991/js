@@ -11,9 +11,9 @@
       "type": "UNIVERSAL",
       "filters": [],
       "attributes": [],
-      "versionCode": 211023,
-      "versionName": "2.11.23.Alpha.debug",
-      "outputFile": "cmfa-2.11.23-alpha-universal-debug.apk"
+      "versionCode": 211024,
+      "versionName": "2.11.24.Alpha.debug",
+      "outputFile": "cmfa-2.11.24-alpha-universal-debug.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -24,9 +24,9 @@
         }
       ],
       "attributes": [],
-      "versionCode": 211023,
-      "versionName": "2.11.23.Alpha.debug",
-      "outputFile": "cmfa-2.11.23-alpha-armeabi-v7a-debug.apk"
+      "versionCode": 211024,
+      "versionName": "2.11.24.Alpha.debug",
+      "outputFile": "cmfa-2.11.24-alpha-armeabi-v7a-debug.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -37,9 +37,9 @@
         }
       ],
       "attributes": [],
-      "versionCode": 211023,
-      "versionName": "2.11.23.Alpha.debug",
-      "outputFile": "cmfa-2.11.23-alpha-arm64-v8a-debug.apk"
+      "versionCode": 211024,
+      "versionName": "2.11.24.Alpha.debug",
+      "outputFile": "cmfa-2.11.24-alpha-arm64-v8a-debug.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -50,9 +50,9 @@
         }
       ],
       "attributes": [],
-      "versionCode": 211023,
-      "versionName": "2.11.23.Alpha.debug",
-      "outputFile": "cmfa-2.11.23-alpha-x86_64-debug.apk"
+      "versionCode": 211024,
+      "versionName": "2.11.24.Alpha.debug",
+      "outputFile": "cmfa-2.11.24-alpha-x86_64-debug.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -63,9 +63,9 @@
         }
       ],
       "attributes": [],
-      "versionCode": 211023,
-      "versionName": "2.11.23.Alpha.debug",
-      "outputFile": "cmfa-2.11.23-alpha-x86-debug.apk"
+      "versionCode": 211024,
+      "versionName": "2.11.24.Alpha.debug",
+      "outputFile": "cmfa-2.11.24-alpha-x86-debug.apk"
     }
   ],
   "elementType": "File",
