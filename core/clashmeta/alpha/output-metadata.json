@@ -20,13 +20,13 @@
       "filters": [
         {
           "filterType": "ABI",
-          "value": "armeabi-v7a"
+          "value": "x86_64"
         }
       ],
       "attributes": [],
       "versionCode": 211024,
       "versionName": "2.11.24.Alpha.debug",
-      "outputFile": "cmfa-2.11.24-alpha-armeabi-v7a-debug.apk"
+      "outputFile": "cmfa-2.11.24-alpha-x86_64-debug.apk"
     },
     {
       "type": "ONE_OF_MANY",
@@ -46,13 +46,13 @@
       "filters": [
         {
           "filterType": "ABI",
-          "value": "x86_64"
+          "value": "armeabi-v7a"
         }
       ],
       "attributes": [],
       "versionCode": 211024,
       "versionName": "2.11.24.Alpha.debug",
-      "outputFile": "cmfa-2.11.24-alpha-x86_64-debug.apk"
+      "outputFile": "cmfa-2.11.24-alpha-armeabi-v7a-debug.apk"
     },
     {
       "type": "ONE_OF_MANY",
